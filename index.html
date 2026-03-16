@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ukil Banner Creator</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; background: #f0f2f5; padding: 20px; }
+        .card { background: white; padding: 20px; border-radius: 15px; display: inline-block; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .step { margin: 20px 0; padding: 10px; border-bottom: 1px solid #eee; }
+        .btn { padding: 10px 20px; cursor: pointer; border-radius: 5px; border: none; font-weight: bold; }
+        .btn-primary { background: #1a8a5f; color: white; }
+    </style>
+</head>
+<body>
+    <div class="card">
+
+        <h2>Ukil Banner Generator</h2>
+
+        <div class="step">
+            <p><b>Template</b> image:</p>
+                <!-- <input type="file" id="templateInput" accept="image/*"> -->
+                <img src="template.jpg" alt="Template" style="max-width: 50%; border: 2px solid #1a8a5f; border-radius: 10px;">                
+            <!-- <input type="file" id="templateInput" accept="image/*"> -->
+             
+        </div>
+
+        <div class="step">
+            <p>Now, upload the <b>User's Photo</b>:</p>
+            <input type="file" id="userInput" accept="image/*">
+        </div>
+
+        <button class="btn btn-primary" onclick="generate()">Generate Banner</button>
+    </div>
+
+    <script>
+        let templateData = "";
+        let userData = "";
+
+        // document.getElementById('templateInput').onchange = function(e) {
+        //     const r = new FileReader();
+        //     r.onload = () => { templateData = r.result; };
+        //     r.readAsDataURL(e.target.files[0]);
+        // };
+
+        document.getElementById('userInput').onchange = function(e) {
+            const r = new FileReader();
+            r.onload = () => { userData = r.result; };
+            r.readAsDataURL(e.target.files[0]);
+        };
+
+        function generate() {
+            if (!userData) return alert("Please upload user's photo!");
+            // localStorage.setItem("templateImg", templateData);
+            localStorage.setItem("userPhoto", userData);
+            window.location.href = "result.html";
+        }
+    </script>
+</body>
+</html>

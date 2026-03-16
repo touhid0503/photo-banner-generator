@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Result</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+            background: #f0f2f5;
+        }
+
+        canvas {
+            max-width: 90%;
+            border: 2px solid #1a8a5f;
+            margin: 20px;
+            background: #fff;
+        }
+
+        .btn {
+            background: #1a8a5f;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            display: inline-block;
+            cursor: pointer;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Your Banner is Ready</h2>
+    <canvas id="bannerCanvas" width="1200" height="628"></canvas>
+    <br>
+    <!-- <button id="downloadBtn" class="btn">Download Banner</button> -->
+    <button onclick="window.location.href = 'index.html'" class="btn">Back</button>
+
+    <script>
+        window.onload = function () {
+            const canvas = document.getElementById('bannerCanvas');
+            const ctx = canvas.getContext('2d');
+
+            const templateBase64 = "template.jpg";
+            const userBase64 = localStorage.getItem("userPhoto");
+
+            const tImg = new Image();
+            const uImg = new Image();
+
+            tImg.src = templateBase64;
+            tImg.onload = function () {
+                ctx.drawImage(tImg, 0, 0, 1200, 628);
+
+                uImg.src = userBase64;
+                uImg.onload = function () {
+                    // YOUR EXACT COORDINATES
+                    ctx.drawImage(uImg, 475, 248, 250, 250);
+                };
+            };
+
+            document.getElementById('downloadBtn').onclick = function () {
+                const image = canvas.toDataURL("image/jpeg", 1.0);
+
+                const link = document.createElement("a");
+                link.href = image;
+                link.download = "Eid_Banner.jpg";
+
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            };
+        };
+    </script>
+</body>
+
+</html>
