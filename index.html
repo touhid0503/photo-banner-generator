@@ -1,59 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Ukil Banner Creator</title>
+
     <style>
-        body { font-family: sans-serif; text-align: center; background: #f0f2f5; padding: 20px; }
-        .card { background: white; padding: 20px; border-radius: 15px; display: inline-block; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .step { margin: 20px 0; padding: 10px; border-bottom: 1px solid #eee; }
-        .btn { padding: 10px 20px; cursor: pointer; border-radius: 5px; border: none; font-weight: bold; }
-        .btn-primary { background: #1a8a5f; color: white; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: sans-serif;
+            background: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        .step {
+            margin: 20px 0;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .step img {
+            width: 100%;
+            max-width: 350px;
+            border: 2px solid #1a8a5f;
+            border-radius: 10px;
+        }
+
+        input[type="file"] {
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .btn {
+            margin-top: 20px;
+            padding: 12px 25px;
+            cursor: pointer;
+            border-radius: 8px;
+            border: none;
+            font-weight: bold;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        .btn-primary {
+            background: #1a8a5f;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #156c4a;
+        }
+
+        /* Tablet */
+
+        @media (min-width:768px) {
+
+            .card {
+                max-width: 600px;
+                padding: 40px;
+            }
+
+        }
+
+        /* Desktop */
+
+        @media (min-width:1024px) {
+
+            .card {
+                max-width: 700px;
+            }
+
+        }
     </style>
+
 </head>
+
 <body>
+
     <div class="card">
 
         <h2>Ukil Banner Generator</h2>
 
         <div class="step">
-            <p><b>Template</b> image:</p>
-                <!-- <input type="file" id="templateInput" accept="image/*"> -->
-                <img src="template.jpg" alt="Template" style="max-width: 50%; border: 2px solid #1a8a5f; border-radius: 10px;">                
-            <!-- <input type="file" id="templateInput" accept="image/*"> -->
-             
+            <p><b>Template image</b></p>
+
+            <img src="template.jpg" alt="Template">
+
         </div>
 
         <div class="step">
-            <p>Now, upload the <b>User's Photo</b>:</p>
+
+            <p>Upload <b>User Photo</b></p>
+
             <input type="file" id="userInput" accept="image/*">
+
         </div>
 
         <button class="btn btn-primary" onclick="generate()">Generate Banner</button>
+
     </div>
 
     <script>
-        let templateData = "";
+
         let userData = "";
 
-        // document.getElementById('templateInput').onchange = function(e) {
-        //     const r = new FileReader();
-        //     r.onload = () => { templateData = r.result; };
-        //     r.readAsDataURL(e.target.files[0]);
-        // };
+        document.getElementById('userInput').onchange = function (e) {
 
-        document.getElementById('userInput').onchange = function(e) {
             const r = new FileReader();
-            r.onload = () => { userData = r.result; };
+
+            r.onload = () => { userData = r.result };
+
             r.readAsDataURL(e.target.files[0]);
+
         };
 
         function generate() {
+
             if (!userData) return alert("Please upload user's photo!");
-            // localStorage.setItem("templateImg", templateData);
+
             localStorage.setItem("userPhoto", userData);
+
             window.location.href = "result.html";
+
         }
+
     </script>
+
 </body>
+
 </html>
